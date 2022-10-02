@@ -1,0 +1,42 @@
+What problems / warnings are there with code?
+
+
+1. Defining a default prop as null is not recommended. 
+Either use Undefined or an array of values.
+     WrappedListComponent.defaultProps = {
+  items: null,
+};
+
+
+2. Unique key prop is missing for List items.
+ <ul style={{ textAlign: 'left' }}>
+      {items.map((item, index) => (
+        <SingleListItem
+          onClickHandler={() => handleClick(index)}
+          text={item.text}
+          index={index}
+          isSelected={selectedIndex}
+        />
+      ))}
+</ul>
+
+
+3. Syntax errors in the following code. ShapeOf should be shape and array should be arrayOf.
+  WrappedListComponent.propTypes = {
+   items: PropTypes.array(
+     PropTypes.shapeOf({
+       text: PropTypes.string.isRequired,
+     })
+   ),
+ };
+
+
+4. In list item's onClick method there is a function call but onClick accepts function's reference.
+    <li style={{ backgroundColor: isSelected ? "green" : "red" }}
+      onClick={onClickHandler(index)}>
+       {text}
+ </li>
+
+
+5. Syntax error in useState() hook
+  const [setSelectedIndex, selectedIndex] = useState(); 
